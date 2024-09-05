@@ -4,11 +4,27 @@ require "src/api_data.php";
 require "src/json_utils.php";
 require "src/prompt_utils.php";
 
+function parse_response($response, $return_types): array {
+    $mock_datas = explode(",", $response);
+
+    $index = 0;
+    foreach ($return_types as $key => $value) {
+        if (isset($arrayDati[$index])) {
+            $mock_array[$key] = $mock_datas[$index];
+        }
+        $index++;
+    }
+
+    return $mock_array;
+}
+
 function retrieve_data_from_chat_gpt($data, $number): array {
     $chat_gpt = new ChatGPTApi($data['chat_gpt_api_key']);
 
     $prompt = craft_prompt($data['return_types'], $number);
-    return $chat_gpt->send_request($prompt);
+    $response = $chat_gpt->send_request($prompt);
+
+    return parse_response($response, $data['return_types']);
 }
 
 function retrieve_data_from_unsplash($data, $number): array {
