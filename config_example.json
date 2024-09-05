@@ -1,0 +1,13 @@
+{
+    "return_types": {
+        "title": "SHORTTEXT",
+        "image": "IMAGE",
+        "date": "DATE",
+        "time": "TIME",
+        "description": "TEXT",
+        "visualizations": "INT"
+    },
+
+    "chat_gpt_api_key": "YOUR_API_KEY",
+    "unsplash_api_key": "YOUR_API_KEY"
+}
