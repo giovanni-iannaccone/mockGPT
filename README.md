@@ -30,11 +30,25 @@ docker-compose up -d
 Create a .json file with this structure
 
 ```json
-"return_types": {
-  
+{
+    "return_types": {
+    
+    },
+    "number_of_data_to_generate": "the int number of mock data",
+
+    "chat_gpt_api_key": "YOUR_API_KEY",
+    "unsplash_api_key": "YOUR_API_KEY",
 }
-"number_of_data_to_generate": <the int number of mock data>
 ```
+
+- return_types:                                 it basically represent the structure of the json file
+                                                that will be returned with the data type of each field,
+                                                chat gpt will use them so you can type whatever you want
+                                                but if you want to generate images you must write IMAGE
+
+- number_of_data_to_generate:                   how many of the mock data will be generated
+
+- the api keys aren't necessary if you are not going to use that api
 
 ## 👨‍💻 Using
 Go to http://localhost:[PORT]/index.php?configurations=[CONFIGURATION_FILE].json   <br/><br/>
