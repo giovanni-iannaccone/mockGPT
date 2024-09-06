@@ -21,7 +21,34 @@ class Test {
 class TestJsonUtils extends Test {
 
     private function test_parse_response(): int {
-        return 1;
+        $test_string = '17, 04-09-2024, 1.00, mockGPT, 13, 24-10-2020, 5.05, helloWorld';
+        $test_return_types = array(
+            "number" => "INT",
+            "data" => "DATA",
+            "float" => "FLOAT",
+            "text" => "TEXT"
+        );
+
+        $expected_result = array(
+            array(
+                'number' => '17',
+                'data' => '04-09-2024',
+                'float' => '1.00',
+                'text' => 'mockGPT'
+            ),
+
+            array(
+                'number' => '13',
+                'data' => '24-10-2020',
+                'float' => '5.05',
+                'text' => 'helloWorld'
+            )
+        );
+
+        return $this->assert(
+            parse_response($test_string, $test_return_types) == $expected_result,
+            "Parse response"
+        );
     }
 
     public function run_test(): int {
