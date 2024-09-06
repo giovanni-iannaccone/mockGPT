@@ -35,23 +35,25 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
-$file_path = $_GET['configurations'];
+$request_body = file_get_contents('php://input');
+$data_received = json_decode($request_body, true);
+
+$file_path = $data['configurations'];
 if (empty($file_path)) {
     die('Missing param: configurations');
 }
 
-$data = read_and_decode_json_file($file_path);
-
+$data = read_and_decode_json_file();
 $number_of_data_to_generate = $data['number_of_data_to_generate'];
 if ($number_of_data_to_generate <= 0) {
     die('Error in configurations: number_of_data_to_generate must be positive');
 }
 
-$data_for_chat_gpt = extract_data_types($data['return_types'], $INVALID = "IMAGE");
-$data_for_chat_gpt += ['chat_gpt_api_key' => $data['chat_gpt_api_key']];
+$data_types_for_chat_gpt = extract_data_types($data['return_types'], $INVALID = "IMAGE");
+$data_for_chat_gpt = merge_json($data['chat_gpt_api_key'], $data_types_for_unsplash);
 
-$data_for_unsplash = extract_data_types($data['return_types'], $VALID = "IMAGE");
-$data_for_unsplash += ['unsplash_api_key' => $data['unsplash_api_key']];
+$data_types_for_unsplash = extract_data_types($data['return_types'], $VALID = "IMAGE");
+$data_for_unsplash = merge_json($data['unsplash_api_key'], $data_types_for_unsplash);
 
 $response_from_chat = retrieve_data_from_chat_gpt(
     $data_for_chat_gpt, $number_of_data_to_generate

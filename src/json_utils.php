@@ -9,16 +9,16 @@ function extract_data_types($data, string $INVALID_DATA_TYPE = "", string $VALID
         }
     }
 
-    return array(
-        'return_types' => $data_valid
-    );
+    return $data_valid;
 }
 
 function merge_json($first_json, $second_json): array {
     return array_merge($first_json, $second_json);
 }
 
-function read_and_decode_json_file($file_path) {    
+function read_and_decode_json_file() {
+    global $file_path;
+    
     $json = read_file($file_path);
     $json_data = json_decode($json, true); 
     return $json_data;
