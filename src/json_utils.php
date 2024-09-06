@@ -1,26 +1,22 @@
 <?php
 
-function extract_data_types($data, string $INVALID_DATA_TYPE = "", string $VALID_DATA_TYPE = ""): array {
-    $data_valid = [];
+function parse_response($response, $return_types): array {
+    $mock_datas = explode(",", $response);
 
-    foreach ($data as $key => $value) {
-        if ($value != $INVALID_DATA_TYPE || $value == $VALID_DATA_TYPE) {
-            $data_valid[$key] = $value;
+    $index = 0;
+    foreach ($return_types as $key => $value) {
+        if (isset($arrayDati[$index])) {
+            $mock_array[$key] = $mock_datas[$index];
         }
+        $index++;
     }
 
-    return array(
-        'return_types' => $data_valid
-    );
-}
-
-function merge_json($first_json, $second_json): array {
-    return array_merge($first_json, $second_json);
+    return $mock_array;
 }
 
 function read_and_decode_json_file($file_path) {    
     $json = read_file($file_path);
-    $json_data = json_decode($json, true); 
+    $json_data = json_decode($json, true);
     return $json_data;
 }
 

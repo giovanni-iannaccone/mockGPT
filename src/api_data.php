@@ -1,18 +1,13 @@
 <?php
 
-class Api {
-    protected string $api_key;
+class ChatGPTApi {
+
+    private string $api_key;
 
     function __construct(string $api_key) {
         $this->api_key = $api_key;
     }
 
-    public function send_request(string $prompt): string {
-        return "";
-    }
-}
-
-class ChatGPTApi extends Api {
     public function send_request(string $prompt): string {
         $url = 'https://api.openai.com/v1/chat/completions';
 
@@ -48,12 +43,5 @@ class ChatGPTApi extends Api {
 
         curl_close($ch);
         return $answer;
-    }
-}
-
-class UnsplashApi extends Api {
-    public function send_request(string $prompt): string {
-        //TODO: implement this
-        return "";
     }
 }
