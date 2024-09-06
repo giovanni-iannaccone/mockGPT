@@ -40,15 +40,14 @@ class ChatGPTApi extends Api {
         $response = curl_exec($ch);
 
         if (curl_errno($ch)) {
-            $answere = 'Errore nella richiesta: ' . curl_error($ch);
+            $answer = 'Request error: ' . curl_error($ch);
         } else {
             $response_data = json_decode($response, true);
-            print_r($response_data);
-            $answere = $response_data['choices'][0]['message']['content'];
+            $answer = $response_data['choices'][0]['message']['content'];
         }
 
         curl_close($ch);
-        return $answere;
+        return $answer;
     }
 }
 

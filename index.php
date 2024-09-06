@@ -48,18 +48,30 @@ if ($number_of_data_to_generate <= 0) {
 }
 
 $data_for_chat_gpt = extract_data_types($data['return_types'], $INVALID = "IMAGE");
-$data_for_chat_gpt += ['chat_gpt_api_key' => $data['chat_gpt_api_key']];
+$data_for_chat_gpt += [
+    'chat_gpt_api_key' => $data['chat_gpt_api_key']
+];
 
 $data_for_unsplash = extract_data_types($data['return_types'], $VALID = "IMAGE");
-$data_for_unsplash += ['unsplash_api_key' => $data['unplash_api_key']];
+$data_for_unsplash += [
+    'unsplash_api_key' => $data['unsplash_api_key']
+];
 
-$response_from_chat = retrieve_data_from_chat_gpt(
-    $data_for_chat_gpt, $number_of_data_to_generate
-);
+if (count($data_for_chat_gpt) > 0) {
+    $response_from_chat = retrieve_data_from_chat_gpt(
+        $data_for_chat_gpt, $number_of_data_to_generate
+    );
+} else {
+    $response_from_chat_gpt = array();
+}
 
-$response_from_unsplash = retrieve_data_from_unsplash(
-    $data_for_unsplash, $number_of_data_to_generate
-);
+if (count($data_for_unsplash) > 0) {
+    $response_from_unsplash = retrieve_data_from_unsplash(
+        $data_for_unsplash, $number_of_data_to_generate
+    );
+} else {
+    $response_from_unsplash = array();
+}
 
 echo json_encode(
     merge_json($response_from_chat, $response_from_unsplash)
