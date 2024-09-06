@@ -1,7 +1,7 @@
 <img src="https://github.com/user-attachments/assets/749e2795-6273-418e-9009-100cb5d72c33" alt="MockGPT logo">
 
 # 🧪 mockGPT
-A mock data generator fully integrated with chat-gpt, unsplash and docker.
+A mock data generator fully integrated with chat-gpt and docker.
 
 ## 🛸 Installation
 ### 📜 Prerequisites
@@ -36,8 +36,7 @@ Create a .json file with this structure
     },
     "number_of_data_to_generate": "the int number of mock data",
 
-    "chat_gpt_api_key": "YOUR_API_KEY",
-    "unsplash_api_key": "YOUR_API_KEY",
+    "chat_gpt_api_key": "YOUR_API_KEY"
 }
 ```
 
@@ -47,8 +46,6 @@ Create a .json file with this structure
                                                 but if you want to generate images you must write IMAGE
 
 - number_of_data_to_generate:                   how many of the mock data will be generated
-
-- the api keys aren't necessary if you are not going to use that api
 
 ## 👨‍💻 Using
 Go to http://localhost:[PORT]/index.php?configurations=[CONFIGURATION_FILE].json   <br/><br/>
