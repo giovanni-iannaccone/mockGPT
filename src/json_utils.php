@@ -1,17 +1,18 @@
 <?php
 
 function parse_response($response, $return_types): array {
-    $mock_datas = explode(",", $response);
+    $mock_datas = array_map('trim', explode(',', $response));
+    $keys = array_keys($return_types);
 
-    $index = 0;
-    foreach ($return_types as $key => $value) {
-        if (isset($arrayDati[$index])) {
-            $mock_array[$key] = $mock_datas[$index];
-        }
-        $index++;
+    $group_size = count($keys);
+    $result = [];
+
+    for ($i = 0; $i < count($mock_datas); $i += $group_size) {
+        $group = array_slice($mock_datas, $i, $group_size);
+        $result[] = array_combine($keys, $group);
     }
 
-    return $mock_array;
+    return $result;
 }
 
 function read_and_decode_json_file($file_path) {    
