@@ -9,10 +9,10 @@ define("TEST_FAILED", 0);
 class Test {
     protected function assert($condition, $test_name): int {
         if ($condition) {
-            echo '<p style=\'color: green; line-height: 10px\'>[+] ' . $test_name . ': Test Passed </p>';
+            echo '<p style=\'color: green; line-height: 5px\'>[+] ' . $test_name . ': Test Passed </p>';
             return TEST_PASSED;
         } else {
-            echo '<p style=\'color: red; line-height: 10px\'>[-] ' . $test_name . ': Test Failed </p>';
+            echo '<p style=\'color: red; line-height: 5px\'>[-] ' . $test_name . ': Test Failed </p>';
             return TEST_FAILED;
         }
     }
